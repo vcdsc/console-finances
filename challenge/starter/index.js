@@ -94,6 +94,21 @@ var changesAverage = 0;
 var greatestProfitIncrease = 0;
 var greatestProfitDecrease = 0;
 
+// calculate total number of months included in dataset
+var countMonths = [];
+
+for (let i = 0; i < finances.length; i++) {
+  // if the date in the finances array does not exist in the countMonths array, we place it there; in the event that a repeated date was present, this would result in the repeated date being ignored by the "continue"
+  // finances[i] gives us access to the inner arrays; finances[i][0] gives us access to the first element of each of the inner arrays
+  if (!countMonths.includes(finances[i][0])) {
+    countMonths.push(finances[i][0]);
+  } else {
+    continue;
+  }
+
+  totalMonths = countMonths.length;
+}
+
 // display financial analysis results as an alert
 alert(`Financial Analysis
 ----------------------------
