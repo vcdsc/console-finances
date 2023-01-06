@@ -107,17 +107,34 @@ for (let i = 0; i < finances.length; i++) {
   }
 
   totalMonths = countMonths.length;
-
-  // finances[i] gives us access to the inner arrays; finances[i][1] gives us access to the second element of each of the inner arrays
-  // netTotal starts at 0, so if we keep adding the current profit/losses as we loop through the array we obtain the netTotal of profit/losses over the entire period
   netTotal += finances[i][1];
 }
 
+// display financial analysis results in browser console
+console.log(
+  "Financial Analysis" +
+    "\n----------------------------" +
+    "\nTotal Months: " +
+    totalMonths +
+    "\nTotal: " +
+    "$" +
+    netTotal +
+    "\nAverage Change: " +
+    "$" +
+    changesAverage +
+    "\nGreatest Profit Increase: " +
+    "$" +
+    greatestProfitIncrease +
+    "\nGreatest Profit Decrease: " +
+    "$" +
+    greatestProfitDecrease
+);
+
 // display financial analysis results as an alert
-alert(`Financial Analysis
-----------------------------
-Total Months: ${totalMonths}
-Total: ${netTotal}
-Average Change: ${changesAverage}
-Greatest Increase in Profits: ${greatestProfitIncrease}
-Greatest Decrease in Projects: ${greatestProfitDecrease}`);
+// alert(`Financial Analysis
+// ----------------------------
+// Total Months: ${totalMonths}
+// Total: $${netTotal}
+// Average Change: $${changesAverage}
+// Greatest Increase in Profits: $${greatestProfitIncrease}
+// Greatest Decrease in Projects: $${greatestProfitDecrease}`);
