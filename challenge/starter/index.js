@@ -107,6 +107,10 @@ for (let i = 0; i < finances.length; i++) {
   }
 
   totalMonths = countMonths.length;
+
+  // finances[i] gives us access to the inner arrays; finances[i][1] gives us access to the second element of each of the inner arrays
+  // netTotal starts at 0, so if we keep adding the current profit/losses as we loop through the array we obtain the netTotal of profit/losses over the entire period
+  netTotal += finances[i][1];
 }
 
 // display financial analysis results as an alert
