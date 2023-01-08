@@ -125,9 +125,19 @@ for (var i = 0; i < finances.length; i++) {
     previousMonthAmount = finances[i - 1][1];
   }
 
-  // the currentMonthChange variable holds the result of subtracting our currentMonthAmount from our previousMonthAmount
+  // the currentMonthChange variable holds the result of subtracting our currentMonthAmount from our previousMonthAmount; this will help in calculating the greatestProfitIncrease and greatestProfitDecrease - if our currentMonthChange is higher than the value held in greatestProfitIncreaseAmount, than that value gest replaced with the new highest value; we then also pull the month to which this value corresponds
   var currentMonthChange = currentMonthAmount - previousMonthAmount;
   changesTotalAmount += currentMonthChange;
+
+  if (currentMonthChange > greatestProfitIncreaseAmount) {
+    greatestProfitIncreaseAmount = currentMonthAmount;
+    greatestProfitIncreaseMonth = currentMonth;
+  }
+
+  if (currentMonthChange < greatestProfitDecreaseAmount) {
+    greatestProfitDecreaseAmount = currentMonthAmount;
+    greatestProfitDecreaseMonth = currentMonth;
+  }
 }
 
 // ===> average of the month to month changes
