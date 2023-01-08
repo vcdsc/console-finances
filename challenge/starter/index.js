@@ -87,54 +87,72 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
-// create variables needed for financial analysis
-var totalMonths = 0;
-var netTotal = 0;
-var changesAverage = 0;
-var greatestProfitIncrease = 0;
-var greatestProfitDecrease = 0;
+// for further reference, "===>" precedes the several variables needed for the financial analysis
 
-// calculate total number of months included in dataset
-var countMonths = [];
+// ===> total number of months included in the dataset;
+var monthCount = finances.length; // since there seems to be no repeated or missing dates, this is enough to determine the total number of months included in the dataset; if this was not the case however, further manipulation could have been required
 
-for (let i = 0; i < finances.length; i++) {
-  // if the date in the finances array does not exist in the countMonths array, we place it there; in the event that a repeated date was present, this would result in the repeated date being ignored by the "continue"
-  // finances[i] gives us access to the inner arrays; finances[i][0] gives us access to the first element of each of the inner arrays
-  if (!countMonths.includes(finances[i][0])) {
-    countMonths.push(finances[i][0]);
-  } else {
-    continue;
+// ===> net total amount of profits/losses over the entire period
+var netTotalAmount = 0;
+
+// ===> total change in profits from month to month
+var changesTotalAmount = 0;
+
+// ===> greatest increase in profits (date)
+var greatestProfitIncreaseMonth = "";
+// ===> greatest increase in profits (amount)
+var greatestProfitIncreaseAmount = 0;
+
+// ===> greatest decrease in profits (date)
+var greatestProfitDecreaseMonth = "";
+// ===> greatest decrease in profits (amount)
+var greatestProfitDecreaseAmount = 0;
+
+for (var i = 0; i < finances.length; i++) {
+  // finances[i] provides access to the inner arrays; finances[i][0] provides access to the FIRST element of each of the inner arrays, where the DATES are
+  var currentMonth = finances[i][0];
+  // finances[i] provides access to the inner arrays; finances[i][0] provides access to the SECOND element of each of the inner arrays, where the VALUES are
+  var currentMonthAmount = finances[i][1];
+
+  // finances[i][1] is assigned to the currentMonthAmount variable, and finances[i][1] provides access to the values, so while the loop is running each of those values will be added to the netTotalAmount variable
+  netTotalAmount += currentMonthAmount;
+
+  // to compare the change in values from month to month, keep track of our previous and current month amounts
+  var previousMonthAmount = 0;
+
+  // constraint is needed because the previousMonthAmount variable can only be updated if able to step back - for example, if finances[i - 1][1] would land at index 0, there would be no previous value to look at, so this assignment can only be performed if the index is anything other than 0
+  if (i !== 0) {
+    previousMonthAmount = finances[i - 1][1];
   }
 
-  totalMonths = countMonths.length;
-  netTotal += finances[i][1];
+  // the currentMonthChange variable holds the result of subtracting our currentMonthAmount from our previousMonthAmount
+  var currentMonthChange = currentMonthAmount - previousMonthAmount;
+  changesTotalAmount += currentMonthChange;
 }
+
+// ===> average of the month to month changes
+var changesAverageAmount = changesTotalAmount / monthCount;
 
 // display financial analysis results in browser console
 console.log(
-  "Financial Analysis" +
+  "\nFinancial Analysis" +
     "\n----------------------------" +
     "\nTotal Months: " +
-    totalMonths +
+    monthCount +
     "\nTotal: " +
     "$" +
-    netTotal +
+    netTotalAmount +
     "\nAverage Change: " +
     "$" +
-    changesAverage +
+    changesAverageAmount.toFixed(2) +
     "\nGreatest Profit Increase: " +
-    "$" +
-    greatestProfitIncrease +
+    greatestProfitIncreaseMonth +
+    " ($" +
+    greatestProfitIncreaseAmount +
+    ")" +
     "\nGreatest Profit Decrease: " +
-    "$" +
-    greatestProfitDecrease
+    greatestProfitDecreaseMonth +
+    " ($" +
+    greatestProfitDecreaseAmount +
+    ")\n"
 );
-
-// display financial analysis results as an alert
-// alert(`Financial Analysis
-// ----------------------------
-// Total Months: ${totalMonths}
-// Total: $${netTotal}
-// Average Change: $${changesAverage}
-// Greatest Increase in Profits: $${greatestProfitIncrease}
-// Greatest Decrease in Projects: $${greatestProfitDecrease}`);

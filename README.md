@@ -4,7 +4,7 @@
 
 ## GitHub Pages
 
-Deployed version of this project can be seen [here]().
+Deployed version of this project can be seen [here](https://vcdsc.github.io/console-finances/).
 
 ## License
 
