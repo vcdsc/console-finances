@@ -1,3 +1,7 @@
+var warning = confirm(
+  `To see the Financial Analysis in the browser console, right click on the page, select "Inspect" and on the window that will open to your right, on the top, select "Console".`
+);
+
 var finances = [
   ["Jan-2010", 867884],
   ["Feb-2010", 984655],
